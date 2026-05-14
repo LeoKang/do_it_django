@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
     <head>
         <meta charset="utf-8"/>
         <title>{{post.title}} - Blog</title>
+        <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
     </head>
     <body>
         <nav>
