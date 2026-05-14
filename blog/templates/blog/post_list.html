@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Blog</title>
-        <link href="../../static/blog/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
-    </head>
-    <style>
-        nav {background-color: darkgreen; font-size: 150%; text-align: center}
-        nav a {color:gold}
-    </style>
-    <body>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="./blog_list.html">Blog</a>
-            <a href="./about_me.html"></a>
-        </nav>
-
-        <h1>Blog</h1>
-        <p>아직 작성하지 않았습니다.</p>
-    </body>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+<h1>Blog</h1>
+{% for p in post_list %}
+    <hr/>
+    <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
+    <h4>{{ p.created_at }}</h4>
+    <p>{{ p.content }}</p>
+{% endfor %}
+</body>
 </html>
