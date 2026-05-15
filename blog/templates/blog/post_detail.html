@@ -9,6 +9,9 @@
         <title>Blog Post - Start Bootstrap Template</title>
         <!-- Favicon-->
         <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+
+        <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.7.0/styles/webawesome.css" />
+        <script type="module" src="https://ka-f.webawesome.com/webawesome@3.7.0/webawesome.loader.js"></script>
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -58,6 +61,17 @@
                             <a href="{{ post.file_upload.url }}"
                              class="btn btn-outline-dark"
                              role="button" download>Download</a>
+
+                                {% if post.get_file_ext == 'csv'%}
+                                <i class="fas fa-file-csv"></i>
+                                {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fas fa-file-excel"></i>
+                                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                <i class="fas fa-file-word"></i>
+                                {% else %}
+                                <i class="far fa-file"></i>
+                                {% endif %}
+                                {{ post.get_file_name }}
                             {% endif %}
 
                             <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
