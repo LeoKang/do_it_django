@@ -64,7 +64,7 @@
                                 {% endif %}                             
                                 <div class="card-body">
                                     <h2 class="card-title">{{ p.title}}</h2>
-                                    <p class="card-text">{{ p.content }}</p>
+                                    <p class="card-text">{{ p.content | truncatewords:45 }}</p>
                                     <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                                 </div>
                                 <div class="card-footer text-muted">
@@ -138,6 +138,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="{% static 'blog/js/scripts.js' %}"></script>
     </body>
 </html>
