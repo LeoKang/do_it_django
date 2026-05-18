@@ -3,7 +3,7 @@
 {% block main_area %}
     <h1>Blog
         {% if category %}{{ category }}{% endif %}
-        {% if tag %}{{ tag }}{% endif %}
+        {% if tag %}{{ tag }}({{ tag.post_set.count }}){% endif %}
     </h1>
     {% if post_list.exists %}
 
