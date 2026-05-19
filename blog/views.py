@@ -69,6 +69,8 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title','hook_text','content','head_image','file_upload','category','tag']
 
+    template_name = 'blog/post_update_form.html'
+
     # dispatch() : 방문자가 웹 사이트 서버에 get 방식으로 요청했는지,
     #               post 방식으로 요청했는지 판단하는 기능을 수행
     def dispatch(self, request, *args, **kwargs):
