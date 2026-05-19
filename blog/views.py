@@ -1,7 +1,8 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Post, Category, Tag
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 class PostList(ListView):
     model = Post
@@ -63,6 +64,18 @@ class PostCreate(LoginRequiredMixin, CreateView):
             return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/blog/')
+
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title','hook_text','content','head_image','file_upload','category','tag']
+
+    # dispatch() : 방문자가 웹 사이트 서버에 get 방식으로 요청했는지,
+    #               post 방식으로 요청했는지 판단하는 기능을 수행
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
 
 # def index(request):
 #     posts = Post.objects.all().order_by('-pk')
