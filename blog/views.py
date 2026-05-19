@@ -55,7 +55,7 @@ class PostDetail(DetailView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title','hook_text','content','head_image','file_upload','category',]
+    fields = ['title','hook_text','content','head_image','file_upload','category','tags']
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -67,7 +67,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title','hook_text','content','head_image','file_upload','category']
+    fields = ['title','hook_text','content','head_image','file_upload','category','tags']
 
     template_name = 'blog/post_update_form.html'
 
