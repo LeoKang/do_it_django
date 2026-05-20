@@ -4,9 +4,7 @@
 
     {% if user.is_authenticated %}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-right"
-             href="/blog/create_post/" role="button">
-             <i class="fas fa-pen"></i>&nbsp;New Post</a>
+            <a class="btn btn-info btn-sm float-right" href="/blog/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
         {% endif %}
     {% endif %}
 
@@ -14,6 +12,7 @@
         {% if category %}{{ category }}{% endif %}
         {% if tag %}{{ tag }}({{ tag.post_set.count }}){% endif %}
     </h1>
+
     {% if post_list.exists %}
 
         {% for p in post_list %}
@@ -30,6 +29,7 @@
                     {% else %}
                         미분류
                     {% endif %}
+
                     <h2 class="card-title">{{ p.title}}</h2>
                     {% if p.hook_text %}
                         <h5 class="text-muted">{{ p.hook_text }}</h5>
@@ -41,8 +41,8 @@
                         {% for tag in p.tags.iterator %}
                             <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
                         {% endfor %}
-                        <br />
-                        <br />
+                        <br/>
+                        <br/>
                     {% endif %}
 
                     <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
