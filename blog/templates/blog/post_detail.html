@@ -9,7 +9,7 @@
 {% block main_area %}
     <div id="post-area">
         {% if post.category %}
-            {{post.category}}
+            <span class="float-right">{{ post.category }}</span>
         {% else %}
             미분류
         {% endif %}
@@ -74,7 +74,6 @@
         {{ post.get_file_name }}
     {% endif %}
 </section>
-</article>
 </div>
 <div id="comment-area">
 <!-- Comments section-->
@@ -84,7 +83,7 @@
     <div class="card-body py-3">
         <!-- Comment form-->
         {% if user.is_authenticated %}
-        <form id="comment-form" method="post" action="{{ post.get_absolute_url }}new_comment/">
+        <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
             {% csrf_token %}
             <div class="form-group mb-3">
                 {{ comment_form | crispy }}
@@ -92,8 +91,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         {% else %}
-        <a role="button" class="btn btn-outline-dark btn-sm" href="#"
-            data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+        <a role="button" class="btn btn-outline-dark btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
         {% endif %}
     </div>
 </div>
@@ -117,6 +115,9 @@
                 <div class="fw-bold">{{ comment.author.username }} &nbsp;&nbsp;
                     <small class="text-muted">{{comment.created_at}}</small></div>
                 <p>{{ comment.content | linebreaks}}</p>
+                {% if comment.created_at != comment.modified_at %}
+                    <p class="text-muted float-right"><small>Updated: {{ comment.modified_at }}</small></p>
+                {% endif %}
             </div>
         </div>
             {% endfor %}

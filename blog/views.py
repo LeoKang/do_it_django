@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.utils.text import slugify
 from django.shortcuts import get_object_or_404
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Comment
 
 
 from django.core.exceptions import PermissionDenied
@@ -20,6 +20,7 @@ class PostList(ListView):
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
 
+
 class PostDetail(DetailView):
     model = Post
     
@@ -27,12 +28,12 @@ class PostDetail(DetailView):
         context = super(PostDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
-        context['comment_form'] = CommentForm()
+        context['comment_form'] = CommentForm
         return context
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title','hook_text','content','head_image','file_upload','category']
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category']
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -56,8 +57,9 @@ class PostCreate(LoginRequiredMixin, CreateView):
                     self.object.tags.add(tag)
 
             return response
+
         else:
-            return redirect('/blog/')
+                return redirect('/blog/')
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
@@ -156,6 +158,17 @@ def new_comment(request, pk):
             return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
+
+class CommentUpdate(LoginRequiredMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
 
 # def index(request):
 #     posts = Post.objects.all().order_by('-pk')
