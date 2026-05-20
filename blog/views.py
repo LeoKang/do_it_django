@@ -1,4 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+
+from blog.forms import CommentForm
 from .models import Post, Category, Tag
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,8 +17,6 @@ class PostList(ListView):
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
 
-
-
 class PostDetail(DetailView):
     model = Post
     
@@ -24,6 +24,7 @@ class PostDetail(DetailView):
         context = super(PostDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
+        context['comment_form'] = CommentForm
         return context
 
 class PostCreate(LoginRequiredMixin, CreateView):
