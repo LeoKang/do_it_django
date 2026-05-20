@@ -106,9 +106,12 @@
             <div class="ms-3">
 
                 {% if user.is_authenticated and comment.author == user %}
-                <a role="button" class="btn btn-sm btn-info float-right"
-                id="comment-{{comment.pk}}-update-btn"
-                href="/blog/update_comment/{{comment.pk}}/">edit</a>
+                <div class="float-right">
+                    <a role="button"
+                        class="btn btn-sm btn-info float-right"
+                        id="comment-{{comment.pk}}-update-btn"
+                        href="/blog/update_comment/{{comment.pk}}/">edit</a>
+                </div>
                 {% endif %}
 
                 <div class="fw-bold">{{ comment.author.username }} &nbsp;&nbsp;
