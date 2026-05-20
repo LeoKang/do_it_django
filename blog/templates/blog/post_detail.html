@@ -5,6 +5,7 @@
     {{ post.title }} - Blog
 {% endblock %}
 
+
 {% block main_area %}
     <div id="post-area">
         {% if post.category %}
@@ -27,11 +28,9 @@
 
  <hr>
 
-{% if user.is_authenticated and user == post.author %} 
- <a class="btn btn-info btn-sm float-right"
-  href="/blog/update_post/{{ post.pk }}/" role="button">
-    <i class="fas fa-pen"></i>Edit Post</a>
-{% endif %}
+        {% if user.is_authenticated and user == post.author %}
+            <a class="btn btn-info btn-sm float-right" href="/blog/update_post/{{ post.pk }}/" role="button"><i class="fas fa-pen"></i>  Edit Post</a>
+        {% endif %}
 
  <!-- Date/Time -->
  <p>Posted on {{ post.created_at }}</p>
@@ -81,6 +80,7 @@
 <!-- Comments section-->
 <section class="mb-5">
 <div class="card bg-light">
+	<h5 class="card-header">Leave a Comment:</h5>
     <div class="card-body">
         <!-- Comment form-->
         <form class="mb-4">
@@ -90,6 +90,7 @@
                     <div class="form-group">
                         {{ comment_form | crispy}}
                     </div>
+					<button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             {% else %}
                 <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#"
