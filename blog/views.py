@@ -27,7 +27,7 @@ class PostDetail(DetailView):
         context = super(PostDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
-        context['comment_form'] = CommentForm
+        context['comment_form'] = CommentForm()
         return context
 
 class PostCreate(LoginRequiredMixin, CreateView):
