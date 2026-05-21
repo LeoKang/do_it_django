@@ -13,10 +13,10 @@ services:
   db:
     image: postgres:12.0-alpine
     volumes:
-      - postres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER:do_it_django_db_user
-      - POSTGRES_PASSWORD:do_it_django_db_password
+      - POSTGRES_USER=do_it_django_db_user
+      - POSTGRES_PASSWORD=do_it_django_db_password
       - POSTGRES_DB=do_it_django_dev
 volumes:
   postgres_data:
