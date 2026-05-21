@@ -22,12 +22,13 @@
                         {% for post in recent_posts %}
                             <div class="card mt-1">
                                 <div class="card-body">
-                                    <h6>
-                                        <a href="{{ post.get_absolute_url }}"
-                                        class="text-decoration-non text-dark">{{ post.title }}</a>
-                                    </h6>
+                                    <h6><a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">{{ post.title }}</a></h6>
                                     <span>
+                                        <img class="mr-1 rounded-circle" width="20px" src="{{ post.get_avatar_url }}" alt="{{ post.author }}">
                                         {{ post.author.username }}
+                                        &nbsp;
+                                        &nbsp;
+                                        {{ post.created_at }}
                                     </span>
                                 </div>
                             </div>
