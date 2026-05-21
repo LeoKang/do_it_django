@@ -5,3 +5,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
+section {
+    margin-bottom: 150px;
+}
