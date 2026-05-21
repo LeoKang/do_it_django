@@ -1,5 +1,5 @@
 # docker image 불러오기
-FROM python:3.8.0-silm-buster
+FROM python:3.12-slim-bookworm
 
 # 작업폴더 지정
 WORKDIR /usr/src/app
